@@ -43,7 +43,6 @@ public class HelloController{
 
     //Handles requests of the form /hello/LaunchCode
     @GetMapping("{name}")
-//    @ResponseBody
     public String helloWithPathParam(@PathVariable String name){
     return "Darling " + name + "!";
     }
@@ -55,12 +54,58 @@ public class HelloController{
     public String helloForm(){
         return "<html>" +
                 "<body>" +
-                "<form action='/hello' method='post'>" + //submit a request to /hello
+                "<form action='hello' method='post'>" + //submit a request to /hello
                 "<input type='text' name='name'>" +
+                "<select name='language' id='pet-select'>"+
+    "<option value='english'>English</option>"+
+                "<option value='french'>French</option>"+
+                "<option value='italian'>Italian</option>"+
+                "<option value='spanish'>Spanish</option>"+
+                "<option value='german'>German</option>"+
+                "</select>" +
                 "<input type='submit' value='Greet me!'>" +
                 "</form>" +
                 "</body>" +
                 "</html>";
 
+    }
+
+//Method with new Hello
+//@GetMapping("message")
+//@RequestMapping(method=RequestMethod.POST)
+@RequestMapping(value="hello", method = RequestMethod.POST)
+    public String helloPost(@RequestParam String name,@RequestParam String language){
+    if(name==""){
+        name="World";
+    }
+
+        return createMessage(name, language);
+
+    }
+
+
+    //New method with custom create message
+
+    public String createMessage(String n,String l){
+        String greeting = "";
+    if(l.equals("english")){
+        greeting = "Hello";
+    }else if (l.equals("french")) {
+        greeting = "Bonjour";
+    }
+    else if (l.equals("italian")) {
+        greeting = "Bonjourno";
+    }
+    else if (l.equals("spanish")) {
+        greeting = "Hola";
+    }
+    else if (l.equals("german")) {
+        greeting = "Hallo";
+    }
+    return "<html>" +
+            "<body style='background-color:red'>" +
+            " <p style='color:blue;font-size:46px'>" + greeting + " " + n + "</p>" +
+            "</body>" +
+            "</html>";
     }
 }
