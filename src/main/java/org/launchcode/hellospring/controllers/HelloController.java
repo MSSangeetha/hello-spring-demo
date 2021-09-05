@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.websocket.server.PathParam;
 
 @Controller
-@ResponseBody
+
 @RequestMapping("hello")
 public class HelloController{
 
@@ -24,7 +24,7 @@ public class HelloController{
     //lives in /hello/goodbye
     @GetMapping("goodbye")
     //tells that the method returns a string
-//    @ResponseBody
+    @ResponseBody
     public String goodbye(){
         return "Goodbye, Spring!";
     }
@@ -35,7 +35,7 @@ public class HelloController{
 //    @GetMapping("hello")
 //    @PostMapping("hello")
     @RequestMapping(method={RequestMethod.GET,RequestMethod.POST})
-//    @ResponseBody
+    @ResponseBody
     //lives in /hello/hello
     public String helloWithQueryParam(@RequestParam String name){
     return "Hello Query Parameter " + name + "!";
@@ -43,7 +43,7 @@ public class HelloController{
 
     //Handles requests of the form /hello/LaunchCode
     @GetMapping("{name}")
-//    @ResponseBody
+    @ResponseBody
     public String helloWithPathParam(@PathVariable String name){
     return "Darling " + name + "!";
     }
@@ -53,14 +53,7 @@ public class HelloController{
     @GetMapping("form")
 //    @ResponseBody
     public String helloForm(){
-        return "<html>" +
-                "<body>" +
-                "<form action='/hello' method='post'>" + //submit a request to /hello
-                "<input type='text' name='name'>" +
-                "<input type='submit' value='Greet me!'>" +
-                "</form>" +
-                "</body>" +
-                "</html>";
+        return "form";
 
     }
 }
