@@ -5,10 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action='/hello' method='post'>
-    <input type='text' name='name'>
-    <input type='submit' value='Greet me!'>
-    </form>
+<p th:text="${greeting}">Hello, Spring!</p>
 
 </body>
 </html>

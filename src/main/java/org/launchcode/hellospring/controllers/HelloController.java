@@ -1,9 +1,12 @@
 package org.launchcode.hellospring.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 
@@ -32,20 +35,24 @@ public class HelloController{
 
     //Handles (Query parameters) request of the form /hello?name=LaunchCode
     //Method with Parameters
-//    @GetMapping("hello")
+    @GetMapping("hello")
 //    @PostMapping("hello")
     @RequestMapping(method={RequestMethod.GET,RequestMethod.POST})
-    @ResponseBody
+//    @ResponseBody
     //lives in /hello/hello
-    public String helloWithQueryParam(@RequestParam String name){
-    return "Hello Query Parameter " + name + "!";
+    public String helloWithQueryParam(@RequestParam String name, Model model){
+   String thegreeting = "Hello, " + name + "!";
+   model.addAttribute("greeting", thegreeting);
+        return "hello";
     }
 
     //Handles requests of the form /hello/LaunchCode
     @GetMapping("{name}")
-    @ResponseBody
-    public String helloWithPathParam(@PathVariable String name){
-    return "Darling " + name + "!";
+
+    public String helloWithPathParam(@PathVariable String name,Model model){
+        String thegreeting = "Darling, " + name + "!";
+        model.addAttribute("greeting",thegreeting);
+    return "hello";
     }
 
     //Controllers with Form
@@ -55,5 +62,19 @@ public class HelloController{
     public String helloForm(){
         return "form";
 
+    }
+
+    //Method for listing names
+    @GetMapping("hello-names")
+    public String helloNames(Model model){
+        List<String> names = new ArrayList<>();
+        names.add("Launchcode");
+        names.add("Sangeetha");
+        names.add("Job");
+        names.add("Success");
+
+        model.addAttribute("names",names);
+
+    return "hello-list";
     }
 }

@@ -5,10 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<form action='/hello' method='post'>
-    <input type='text' name='name'>
-    <input type='submit' value='Greet me!'>
-    </form>
+
+<ul>
+    <th:block th:each="name: ${names}">
+        <li th:text ="${name}"></li>
+    </th:block>
+</ul>
 
 </body>
 </html>
